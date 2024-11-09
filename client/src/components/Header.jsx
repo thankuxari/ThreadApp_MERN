@@ -4,7 +4,7 @@ function Header() {
 			<img
 				alt="logo"
 				className="cursor-pointer size-10 mx-auto mt-6 mb-12"
-				src="./images/logo.png"
+				src="./public/images/logo.png"
 			/>
 		</header>
 	);

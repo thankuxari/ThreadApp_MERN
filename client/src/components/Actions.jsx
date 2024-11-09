@@ -8,7 +8,7 @@ function Actions() {
 
 	return (
 		<div
-			className="py-3 flex items-center gap-3"
+			className="py-3 flex items-center gap-3 cursor-pointer"
 			onClick={(e) => e.preventDefault()}
 		>
 			<CiHeart
