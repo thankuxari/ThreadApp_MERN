@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
-const postSchema = new mongooseSchema(
+const postSchema = new mongoose.Schema(
 	{
 		postedBy: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
 			required: true,
 		},
-		postTitle: {
+		postText: {
 			type: String,
 			required: true,
 			maxLength: 100,
@@ -18,8 +18,9 @@ const postSchema = new mongooseSchema(
 			required: false,
 		},
 		likes: {
-			type: Number,
-			default: 0,
+			type: [mongoose.Schema.Types.ObjectId],
+			ref: 'User',
+			default: [],
 		},
 		replies: [
 			{
@@ -34,15 +35,16 @@ const postSchema = new mongooseSchema(
 					maxLength: 100,
 				},
 				userProfilePic: {
-					type: Buffer,
+					type: String,
+					default: '',
 				},
 				username: {
 					type: String,
 				},
 				repliesLikes: {
-					type: Number,
-					default: 0,
-					required: true,
+					type: [mongoose.Schema.Types.ObjectId],
+					ref: 'User',
+					default: [],
 				},
 			},
 		],
