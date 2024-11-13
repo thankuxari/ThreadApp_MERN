@@ -1,11 +1,11 @@
 import express from 'express';
 import {
-	createPost,
-	getPosts,
-	deletePost,
-	likeUnLikePost,
-	replyToPost,
-	getFeed,
+    createPost,
+    getPosts,
+    deletePost,
+    likeUnLikePost,
+    replyToPost,
+    getFeed,
 } from '../controllers/post.controller.js';
 import protectRoutes from '../middleware/protectRoutes.js';
 
