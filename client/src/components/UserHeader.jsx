@@ -1,10 +1,22 @@
+import { useState } from 'react';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { CiCircleMore } from 'react-icons/ci';
 import { useSnackbar } from 'notistack';
+import { useRecoilValue } from 'recoil';
+import userAtom from '../atoms/userAtom';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-function UserHeader() {
+function UserHeader({ user }) {
+	const currentUser = useRecoilValue(userAtom);
+	const [isFollowing, setIsFollowing] = useState(
+		user.followers.includes(currentUser.user._id)
+	);
+	const [followersCount, setFollowersCount] = useState(user.followers.length);
 	const { enqueueSnackbar } = useSnackbar();
 
+	console.log(isFollowing);
+	console.log(user);
 	function handleCopyUrl() {
 		const url = window.location.href;
 		try {
@@ -16,25 +28,60 @@ function UserHeader() {
 		}
 	}
 
+	async function handleFollowUnfollow(e) {
+		e.preventDefault();
+		try {
+			const response = await axios.post(`/api/users/follow/${user._id}`);
+			setIsFollowing((prev) => !prev);
+			setFollowersCount((prev) => prev + (isFollowing ? -1 : 1));
+			enqueueSnackbar(response.data.message, { variant: 'success' });
+		} catch (error) {
+			enqueueSnackbar(error.response.data.message, { variant: 'error' });
+			console.error(error.message);
+		}
+	}
+
 	return (
 		<div>
 			<div className="flex justify-between">
 				<div>
-					<h1 className="text-5xl font-bold">User</h1>
-					<h4 className="text-md pt-1 font-thin">Username</h4>
+					<h1 className="text-5xl font-bold">{user.name}</h1>
+					<h4 className="text-md pt-3 font-thin">{user.username}</h4>
 				</div>
 				<img
 					className="size-24 rounded-full"
-					src="./public/images/mark.jpg"
+					src={
+						user.profilePic
+							? `http://localhost:5000/${user.profilePic}`
+							: './public/images/no_user_profile_pic.jpg'
+					}
 					alt="User Profile Image"
 				/>
 			</div>
 			<div className="py-4">
-				<p>This is demo description that user inputs</p>
+				<p>{user.bio}</p>
 			</div>
+			{user._id === currentUser.user._id && (
+				<div>
+					<Link to={'/update'} className="btn">
+						Edit Profile
+					</Link>
+				</div>
+			)}
+			{user._id !== currentUser.user._id && (
+				<button onClick={handleFollowUnfollow} className="btn">
+					{isFollowing ? 'Unfollow' : 'Follow'}
+				</button>
+			)}
 			<div className="py-4 flex items-center justify-between flex-wrap    ">
 				<div className="text-gray-400 flex gap-3">
-					<h3>3.2k Followers</h3>
+					<h3>
+						{user.followers.length === 0
+							? 'No Followers'
+							: user.followers.length > 1
+							? `${followersCount} Followers`
+							: `${followersCount} Follower`}
+					</h3>
 					<h3>&#8226;</h3>
 					<a href="#" className="hover:underline">
 						instagram.com

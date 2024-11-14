@@ -1,9 +1,23 @@
 import UserHeader from '../components/UserHeader';
 import UserPost from '../components/UserPost';
+import axios from 'axios';
+import useGetUserProfile from '../hooks/useGetUserProfie';
 function UserProfilePage() {
+	const { user, isLoading } = useGetUserProfile();
+
+	if (!user && isLoading) {
+		return (
+			<div className="flex justify-center items-center h-screen">
+				<span className="loading loading-spinner loading-lg"></span>
+			</div>
+		);
+	}
+
+	if (!user && !isLoading)
+		return <h1 className="text-center">User not found</h1>;
 	return (
 		<>
-			<UserHeader />
+			<UserHeader user={user} />
 			<UserPost
 				postCreator={'Daren'}
 				postTitle={'Epic post title here Daren!'}
