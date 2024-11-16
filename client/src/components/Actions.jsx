@@ -3,9 +3,13 @@ import { CiHeart } from 'react-icons/ci';
 import { IoChatbubbleOutline } from 'react-icons/io5';
 import { PiArrowsCounterClockwise } from 'react-icons/pi';
 import { FiSend } from 'react-icons/fi';
+import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import userAtom from '../atoms/userAtom';
+import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 function Actions() {
 	const [isLiked, setIsLiked] = useState(false);
-
 	return (
 		<div
 			className="py-3 flex items-center gap-3 cursor-pointer"

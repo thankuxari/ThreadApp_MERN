@@ -21,12 +21,12 @@ function LoginCard() {
 				username,
 				password,
 			});
-			const user  = response.data.user;
+			const user = response.data.user;
 			enqueueSnackbar(`Logged In Successfully ! Welcome, ${username}`, {
 				variant: 'success',
 			});
 			localStorage.setItem('user', JSON.stringify({ user }));
-			setUser({ username, password });
+			setUser({ user });
 		} catch (error) {
 			enqueueSnackbar(error.response.data.message, { variant: 'error' });
 			console.error(error.message);

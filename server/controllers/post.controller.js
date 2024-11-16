@@ -14,15 +14,30 @@ async function getPosts(req, res) {
 		return res.status(400).json({ message: error.message });
 	}
 }
+
+async function getUserPosts(req, res) {
+	const { username } = req.params;
+	try {
+		const user = await userModel.findOne({ username });
+		if (!user) return res.status(400).json({ message: error.message });
+
+		const posts = await postModel
+			.find({ postedBy: user._id })
+			.sort({ createdAt: -1 });
+		return res.status(200).json(posts);
+	} catch (error) {
+		return res.status(400).json({ message: error.message });
+	}
+}
 async function createPost(req, res) {
-	const { postText, postImage } = req.body;
+	const { postText } = req.body;
+	const postImage = req.file ? req.file.path : '';
 	const userId = req.userId;
 
 	const textMaxLength = 500;
 
 	try {
 		const userPostedBy = await userModel.findById(userId);
-
 		if (!userPostedBy)
 			return res
 				.status(400)
@@ -41,6 +56,8 @@ async function createPost(req, res) {
 			postText,
 			postImage: postImage || '',
 		});
+
+		console.log(postImage);
 
 		return res
 			.status(200)
@@ -158,7 +175,6 @@ async function getFeed(req, res) {
 		const posts = await postModel
 			.find({ postedBy: { $in: isFollowing } })
 			.sort({ createdAt: -1 });
-		console.log(posts);
 		return res.status(200).json(posts);
 	} catch (error) {
 		res.status(400).json({ message: error.message });
@@ -172,4 +188,5 @@ export {
 	likeUnLikePost,
 	replyToPost,
 	getFeed,
+	getUserPosts,
 };

@@ -13,9 +13,8 @@ const postSchema = new mongoose.Schema(
 			maxLength: 100,
 		},
 		postImage: {
-			type: Buffer,
+			type: String,
 			default: '',
-			required: false,
 		},
 		likes: {
 			type: [mongoose.Schema.Types.ObjectId],
@@ -46,6 +45,10 @@ const postSchema = new mongoose.Schema(
 					ref: 'User',
 					default: [],
 				},
+                createdAt: {
+                    type: Date,
+                    default: Date.now,
+                },
 			},
 		],
 	},

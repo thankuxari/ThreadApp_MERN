@@ -5,6 +5,7 @@ import PostPage from './pages/PostPage';
 import Header from './components/Header';
 import Auth from './pages/Auth';
 import UpdateProfile from './pages/UpdateProfile';
+import Patchnotes from './pages/Patchnotes';
 import axios from 'axios';
 import userAtom from './atoms/userAtom';
 import { useRecoilValue } from 'recoil';
@@ -40,7 +41,11 @@ function App() {
 						user ? <UserProfilePage /> : <Navigate to="/auth" />
 					}
 				/>
-				<Route path="/:username/:postid" element={<PostPage />} />
+				<Route
+					path="/:username/:postid"
+					element={user ? <PostPage /> : <Navigate to="/auth" />}
+				/>
+				<Route path="/patchnotes" element={<Patchnotes />} />
 			</Routes>
 		</div>
 	);

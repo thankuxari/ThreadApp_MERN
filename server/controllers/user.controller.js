@@ -2,16 +2,26 @@ import express from 'express';
 import userModel from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 import generateTokenAndSetCookie from '../utils/generateTokenAndSetCookie.js';
+import mongoose from 'mongoose';
 
 async function getUserProfile(req, res) {
-	const { name } = req.params;
+	const { query } = req.params;
 	try {
-		const user = await userModel.findOne({ name }).select('-password');
-		if (!user)
+		let user;
+		if (mongoose.Types.ObjectId.isValid(query)) {
+			user = await userModel.findOne({ _id: query }).select('-password');
+		} else {
+			user = await userModel
+				.findOne({ username: query })
+				.select('-password');
+		}
+		if (!user) {
 			return res.status(400).json({ message: 'User does not exist' });
-		return res.status(200).json(user);
+		}
+
+		return res.status(200).json(user); // Send user object only when valid
 	} catch (error) {
-		return res.status(400).json({ message: error.message });
+		return res.status(500).json({ message: error.message }); // Consider 500 for server errors
 	}
 }
 
@@ -161,8 +171,6 @@ async function updateUser(req, res) {
 			return res
 				.status(400)
 				.json({ message: 'You dont have access on this page' });
-
-		console.log(profilePic);
 
 		user.name = name || user.name;
 		user.username = username || user.username;

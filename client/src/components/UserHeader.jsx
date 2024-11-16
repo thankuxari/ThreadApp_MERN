@@ -15,8 +15,6 @@ function UserHeader({ user }) {
 	const [followersCount, setFollowersCount] = useState(user.followers.length);
 	const { enqueueSnackbar } = useSnackbar();
 
-	console.log(isFollowing);
-	console.log(user);
 	function handleCopyUrl() {
 		const url = window.location.href;
 		try {

@@ -14,11 +14,16 @@ const userRouter = express.Router();
 
 const upload = mutler({ dest: 'uploads/' });
 
-userRouter.get('/profile/:name', getUserProfile);
+userRouter.get('/profile/:query', getUserProfile);
 userRouter.post('/signup', signUpUser);
 userRouter.post('/login', loginUser);
 userRouter.post('/logout', logoutUser);
 userRouter.post('/follow/:id', protectRoutes, followUnFollowUser);
-userRouter.post('/update_user/:id', protectRoutes, upload.single('profilePic') ,updateUser);
+userRouter.post(
+	'/update_user/:id',
+	protectRoutes,
+	upload.single('profilePic'),
+	updateUser
+);
 
 export default userRouter;

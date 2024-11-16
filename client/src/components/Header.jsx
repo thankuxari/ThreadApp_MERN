@@ -11,14 +11,17 @@ function Header() {
 		<header>
 			<div className="navbar bg-base-100  py-7">
 				<div className="flex-auto">
-					<a className="btn btn-ghost text-xl font-semibold">
-						Velona
-					</a>
+					<Link
+						to={'/patchnotes'}
+						className="btn btn-ghost text-xl font-semibold"
+					>
+						Velona <span className="badge badge-primary">Beta</span>
+					</Link>
 				</div>
 				<div className="flex-auto">
-					<Link to={'/'}>
+					<Link to={`/`}>
 						<img
-							src="./public/images/logo.gif"
+							src="/public/images/logo.gif"
 							className="size-8"
 							alt=""
 						/>{' '}
@@ -32,20 +35,21 @@ function Header() {
 							className="btn btn-ghost btn-circle avatar"
 						>
 							<div className="rounded-full">
-								{user && <CiUser className="size-6" />}
+								{user && (
+									<Link to={`/${user.user?.username}`}>
+										<img
+											className="size-24 rounded-full"
+											src={
+												user.user.profilePic
+													? `http://localhost:5000/${user.user?.profilePic}`
+													: './public/images/no_user_profile_pic.jpg'
+											}
+											alt="User Profile Image"
+										/>
+									</Link>
+								)}
 							</div>
 						</div>
-						<ul
-							tabIndex={0}
-							className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-						>
-							<li>
-								<a className="justify-between">Profile</a>
-							</li>
-							<li>
-								<a>Settings</a>
-							</li>
-						</ul>
 					</div>
 					{user && <LogoutButton />}
 				</div>

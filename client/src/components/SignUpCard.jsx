@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
@@ -13,6 +13,7 @@ function SignUpCard() {
 
 	const authScreenState = useSetRecoilState(authScreenAtom);
 	const setUser = useSetRecoilState(userAtom);
+	const navigate = useNavigate();
 
 	const { enqueueSnackbar } = useSnackbar();
 
@@ -33,7 +34,9 @@ function SignUpCard() {
 			});
 			localStorage.setItem('user', JSON.stringify(user));
 
-			setUser({ name, username, email });
+			setUser({ user });
+
+			navigate(`/${username}`);
 		} catch (error) {
 			enqueueSnackbar(error.message, { variant: 'error' });
 			console.error(error.message);

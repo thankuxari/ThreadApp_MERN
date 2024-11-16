@@ -1,22 +1,32 @@
 import { useState } from 'react';
 import { IoIosMore } from 'react-icons/io';
 import Actions from './Actions';
-function Comment({ postCreator, postTitle, profileImage, likes, replies }) {
+import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+function Comment({
+	postCreator,
+	postTitle,
+	profileImage,
+	likes,
+	replies,
+	commentCreatedAt,
+}) {
 	const [isLiked, setIsLiked] = useState(false);
+    
 	return (
 		<div className="flex pb-10">
-			<div className="w-24">
+			<Link to={`/${postCreator}`} className="w-24">
 				<img
+					className="size-14 rounded-full"
 					src={profileImage}
-					className="rounded-full size-12 md:size-16 object-cover"
-					alt="profile image"
+					alt="User Profile Image"
 				/>
-			</div>
+			</Link>
 			<div className="w-full">
-				<div className="flex justify-between items-center">
+				<div className="flex justify-between items-center ">
 					<h1 className="text-xl font-semibold">{postCreator}</h1>
 					<div className="flex gap-6 items-center">
-						<h1 className="text-gray-400">1d</h1>
+						<h1 className="text-gray-400"></h1>
 						<div className="dropdown dropdown-bottom">
 							<div tabIndex={0} role="button">
 								<IoIosMore
