@@ -81,12 +81,18 @@ function UserHeader({ user }) {
 							: `${followersCount} Follower`}
 					</h3>
 					<h3>&#8226;</h3>
-					<a href="#" className="hover:underline">
-						instagram.com
+					<a>
+						Occupation :{' '}
+						<span className="badge badge-sm badge-primary">
+							Comming Soon
+						</span>
 					</a>
 				</div>
 				<div className="flex gap-6 pr-1">
-					<IoLogoInstagram className="size-6 cursor-pointer hover:text-pink-600" />
+					<IoLogoInstagram
+						className="tooltip tooltip-open tooltip-primary size-6 cursor-pointer hover:text-pink-600"
+						data-tip="Coming Soon"
+					/>
 					<div className="dropdown dropdown-bottom">
 						<div tabIndex={0} role="button">
 							<CiCircleMore className="size-6 cursor-pointer hover:text-gray-600" />

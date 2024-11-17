@@ -25,6 +25,32 @@ async function getUserProfile(req, res) {
 	}
 }
 
+async function getSuggestedUsers(req, res) {
+	try {
+		const loggedInUser = await userModel.findById(req.userId);
+
+		const usersFollowedByLoggedInUser = loggedInUser.followers;
+
+		const users = await userModel.aggregate([
+			{
+				$match: { _id: { $ne: req.userId } },
+			},
+			{
+				$sample: { size: 10 },
+			},
+		]);
+
+		const filteredUsers = users.filter(
+			(user) => !usersFollowedByLoggedInUser.includes(user._id)
+		);
+		const suggestedusers = filteredUsers.slice(0, 4);
+
+		return res.status(200).json(suggestedusers);
+	} catch (error) {
+		return res.status(400).json({ message: error.message });
+	}
+}
+
 async function signUpUser(req, res) {
 	const { name, username, email, password } = req.body;
 	const passwordLengthRequirement = 6;
@@ -64,6 +90,9 @@ async function signUpUser(req, res) {
 				email: user.email,
 				profilePic: user.profilePic,
 				bio: user.bio,
+				followers: user.followers,
+				following: user.following,
+				likes: user.likes,
 			},
 		});
 	} catch (error) {
@@ -98,6 +127,9 @@ async function loginUser(req, res) {
 				email: user.email,
 				profilePic: user.profilePic,
 				bio: user.bio,
+				followers: user.followers,
+				following: user.following,
+				likes: user.likes,
 			},
 		});
 	} catch (error) {
@@ -203,4 +235,5 @@ export {
 	logoutUser,
 	followUnFollowUser,
 	updateUser,
+	getSuggestedUsers,
 };

@@ -22,7 +22,7 @@ function LogoutButton() {
 	}
 
 	return (
-		<div>
+		<div className='flex'>
 			<button
 				className="btn p-3 rounded-lg bg-gray-800"
 				onClick={handleLogout}

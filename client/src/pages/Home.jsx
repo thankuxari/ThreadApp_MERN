@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import userAtom from '../atoms/userAtom';
 import { useState, useEffect } from 'react';
 import Post from '../components/Post';
+import SuggestedUsers from '../components/SuggestedUsers';
 
 function Home() {
 	const user = useRecoilValue(userAtom);
@@ -26,20 +27,30 @@ function Home() {
 	}, []);
 
 	return (
-		<div>
-			<CreatePost />
-			<h1 className="text-xl text-center mt-5">Your Feed 📜</h1>
-			{loading ? (
-				<div className="flex justify-center items-center">
-					<span className="loading loading-spinner loading-lg"></span>
-				</div>
-			) : (
-				<div>
-					{posts.map((post) => (
-						<Post post={post} />
-					))}
-				</div>
-			)}
+		<div className="flex gap-3">
+			<div className="w-[75%]">
+				<CreatePost />
+				<h1 className="text-xl text-center mt-5">Your Feed 📜</h1>
+				{loading ? (
+					<div className="flex justify-center items-center">
+						<span className="loading loading-spinner loading-lg"></span>
+					</div>
+				) : (
+					<div>
+						{posts.length === 0 && (
+							<h1 className="text-xl text-center mt-5">
+								You need to follow some users
+							</h1>
+						)}
+						{posts.map((post) => (
+							<Post post={post} />
+						))}
+					</div>
+				)}
+			</div>
+			<div className="w-[25%]">
+				<SuggestedUsers />
+			</div>
 		</div>
 	);
 }

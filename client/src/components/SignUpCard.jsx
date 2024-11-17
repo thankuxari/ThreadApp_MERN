@@ -32,7 +32,7 @@ function SignUpCard() {
 			enqueueSnackbar(`Signed Up Successfully ! Welcome ${name}`, {
 				variant: 'success',
 			});
-			localStorage.setItem('user', JSON.stringify(user));
+			localStorage.setItem('user', JSON.stringify({ user }));
 
 			setUser({ user });
 

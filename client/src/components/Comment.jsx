@@ -10,6 +10,7 @@ function Comment({
 	likes,
 	replies,
 	commentCreatedAt,
+    post
 }) {
 	const [isLiked, setIsLiked] = useState(false);
     
@@ -51,12 +52,7 @@ function Comment({
 				<div className="pt-3">
 					<p>{postTitle}</p>
 				</div>
-				<Actions />
-				<div className="text-gray-400 flex gap-3">
-					<h3>{replies} Replies</h3>
-					<h3>&#8226;</h3>
-					<h3>{likes} Likes</h3>
-				</div>
+				<Actions post={post}/>
 			</div>
 		</div>
 	);

@@ -73,8 +73,8 @@ function PostPage() {
 	}
 
 	return (
-		<div className="flex flex-col">
-			<div className="flex pb-10">
+		<div className="flex flex-col"> 
+            <div className="flex pb-10">
 				<Link to={`/${user.username}`} className="w-24">
 					<img
 						src={
@@ -126,12 +126,7 @@ function PostPage() {
 							alt="Post content"
 						/>
 					)}
-					<Actions />
-					<div className="text-gray-400 flex gap-3">
-						<h3>{post.replies.length} Replies</h3>
-						<h3>&#8226;</h3>
-						<h3>{post.likes.length} Likes</h3>
-					</div>
+					<Actions post={post}/>
 					<div className="pt-2">
 						<hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 						<div className="flex gap-3">
@@ -158,6 +153,7 @@ function PostPage() {
 
 			{post.replies.map((reply) => (
 				<Comment
+                    post={post}
 					key={reply._id}
 					postCreator={reply.username}
 					postTitle={reply.text}

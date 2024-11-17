@@ -55,14 +55,7 @@ function UserPost({ post, user }) {
 						alt="post image"
 					/>
 				)}
-				<Actions />
-				<div className="text-gray-400 flex gap-3">
-					<h3>{post.replies.length} Replies</h3>
-					<h3>&#8226;</h3>
-					<a href="#" className="hover:underline">
-						{post.likes.length} Likes
-					</a>
-				</div>
+				<Actions post={post}/>
 			</div>
 		</Link>
 	);

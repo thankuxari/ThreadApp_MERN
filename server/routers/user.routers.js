@@ -7,6 +7,7 @@ import {
 	followUnFollowUser,
 	updateUser,
 	getUserProfile,
+    getSuggestedUsers,
 } from '../controllers/user.controller.js';
 import protectRoutes from '../middleware/protectRoutes.js';
 
@@ -25,5 +26,6 @@ userRouter.post(
 	upload.single('profilePic'),
 	updateUser
 );
+userRouter.get('/suggested_users', protectRoutes, getSuggestedUsers);
 
 export default userRouter;
