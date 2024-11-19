@@ -17,7 +17,10 @@ const app = express();
 
 app.use(
     cors({
-        origin: 'https://localhost:5173',
+        origin: [
+            'http://localhost:5000',
+            'https://threadapp-mern.onrender.com',
+        ],
         credentials: true,
     })
 );
