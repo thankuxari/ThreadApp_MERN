@@ -15,13 +15,16 @@ console.log('Port from .env:', process.env.PORT);
 
 const app = express();
 
+// Allow dynamic origins based on the environment
+const allowedOrigins =
+    process.env.NODE_ENV === 'production'
+        ? ['https://threadapp-mern.onrender.com'] // Production allowed origin
+        : ['http://localhost:5173']; // Development allowed origin
+
 app.use(
     cors({
-        origin: [
-            'http://localhost:5173',
-            'https://threadapp-mern.onrender.com',
-        ],
-        credentials: true,
+        origin: allowedOrigins,
+        credentials: true, // Allow cookies and credentials
     })
 );
 
