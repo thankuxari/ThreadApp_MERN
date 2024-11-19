@@ -12,7 +12,7 @@ function UserPost({ post, user }) {
 					src={
 						user.profilePic
 							? `http://localhost:5000/${user.profilePic}`
-							: './public/images/no_user_profile_pic.jpg'
+							: '/images/no_user_profile_pic.jpg'
 					}
 					alt="User Profile Image"
 				/>

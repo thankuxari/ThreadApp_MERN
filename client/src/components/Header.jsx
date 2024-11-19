@@ -21,7 +21,7 @@ function Header() {
                 <div className="flex-auto">
                     <Link to={`/`}>
                         <img
-                            src="/public/images/logo.gif"
+                            src="/assets/logo-DKkp2uJ2.gif"
                             className="size-8"
                             alt=""
                         />{' '}
@@ -42,7 +42,7 @@ function Header() {
                                             src={
                                                 user.user.profilePic
                                                     ? `http://localhost:5000/${user.user?.profilePic}`
-                                                    : './public/images/no_user_profile_pic.jpg'
+                                                    : '/images/no_user_profile_pic.jpg'
                                             }
                                             alt="User Profile Image"
                                         />
