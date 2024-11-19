@@ -7,10 +7,11 @@ import postRouter from './routers/post.router.js';
 import connectDB from './db/connectDB.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
-const PORT = process.env.PORT || 8000;
-
+import dotenv from 'dotenv';
 const __dirname = path.resolve();
+console.log('Loading .env file from:', path.resolve(__dirname, '.env'));
+dotenv.config();
+console.log('Port from .env:', process.env.PORT);
 
 const app = express();
 
@@ -37,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.listen(PORT, (req, res) => {
+app.listen(process.env.PORT, (req, res) => {
     connectDB();
-    console.log(`Server running on port ${PORT}`.green.bold);
+    console.log(`Server running on port ${process.env.PORT}`.green.bold);
 });
