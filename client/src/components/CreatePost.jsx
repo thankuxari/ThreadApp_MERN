@@ -4,13 +4,13 @@ import { useSnackbar } from 'notistack';
 import { useRecoilValue } from 'recoil';
 import userAtom from '../atoms/userAtom';
 import usePreviewImage from '../hooks/usePreviewImage';
+
 function CreatePost() {
     const [postText, setPostText] = useState('');
-    const [postImage, setPostImage] = useState('');
     const postCreator = useRecoilValue(userAtom);
     const { enqueueSnackbar } = useSnackbar();
-
     const { handleImageChange, imgUrl } = usePreviewImage();
+
     async function handleCreatePost(e) {
         e.preventDefault();
         try {
@@ -23,28 +23,47 @@ function CreatePost() {
                 variant: 'success',
             });
         } catch (error) {
-            enqueueSnackbar(error.response, { variant: 'error' });
+            enqueueSnackbar(
+                error.response ? error.response.data.message : 'Error occurred',
+                { variant: 'error' }
+            );
             console.error(error.message);
         }
     }
 
     return (
-        <div>
-            <form
-                className="flex flex-col gap-5 border rounded-lg border-gray-500 p-5"
-                onSubmit={handleCreatePost}
-            >
-                <h1 className="text-3xl"> Tell the wolrd a story 🌍</h1>
+        <div className="max-w-lg mx-auto p-6  border border-gray-500 rounded-xl shadow-xl">
+            <form className="flex flex-col gap-6" onSubmit={handleCreatePost}>
+                <h1 className="text-3xl font-semibold text-white text-center">
+                    Tell the world a story 🌍
+                </h1>
+
                 <textarea
-                    className="textarea textarea-bordered w-full "
+                    className="textarea textarea-bordered w-full rounded-lg p-4 bg-gray-800 text-white placeholder-gray-400 border-gray-500 focus:outline-none focus:border-gray-400 transition duration-200"
+                    placeholder="What's on your mind?"
                     onChange={(e) => setPostText(e.target.value)}
+                    value={postText}
                 ></textarea>
-                <label htmlFor="">Add an image</label>
-                <input type="file" onChange={handleImageChange} />
+
+                <div>
+                    <label
+                        htmlFor="image"
+                        className="text-lg text-gray-400 mb-2 block"
+                    >
+                        Add an image (optional)
+                    </label>
+                    <input
+                        type="file"
+                        id="image"
+                        className="file-input file-input-bordered w-full rounded-lg bg-gray-700 text-gray-400"
+                        onChange={handleImageChange}
+                    />
+                </div>
+
                 <div className="w-full flex justify-end">
                     <button
                         type="submit"
-                        className="btn btn-wide rounded-lg bg-gray-800"
+                        className="btn md:btn-wide rounded-lg bg-gray-800 text-white hover:bg-gray-700"
                     >
                         Post
                     </button>

@@ -27,8 +27,8 @@ function Home() {
 	}, []);
 
 	return (
-		<div className="flex gap-3">
-			<div className="w-[75%]">
+		<div className="flex flex-col md:flex-row gap-3">
+			<div className="overflow-x-hidden md:w-[75%]">
 				<CreatePost />
 				<h1 className="text-xl text-center mt-5">Your Feed 📜</h1>
 				{loading ? (
@@ -50,7 +50,7 @@ function Home() {
 			</div>
 			<div className="w-[25%]">
 				<SuggestedUsers />
-			</div>
+			</div> 
 		</div>
 	);
 }

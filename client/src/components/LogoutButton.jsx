@@ -27,7 +27,7 @@ function LogoutButton() {
 				className="btn p-3 rounded-lg bg-gray-800"
 				onClick={handleLogout}
 			>
-				Logout <IoIosLogOut className='text-xl'/>
+				<p className='hidden md:inline'>Logout</p> <IoIosLogOut className='text-xl'/>
 			</button>
 		</div>
 	);

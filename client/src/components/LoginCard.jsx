@@ -34,7 +34,7 @@ function LoginCard() {
     }
 
     return (
-        <div className="w-[450px] mx-auto">
+        <div className="md:w-[450px] mx-auto">
             <form
                 className="flex flex-col gap-6 p-6 bg-slate-700 rounded-lg"
                 onSubmit={handleLoginUser}

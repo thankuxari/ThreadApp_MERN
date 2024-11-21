@@ -42,11 +42,15 @@ function UserHeader({ user }) {
         <div>
             <div className="flex justify-between">
                 <div>
-                    <h1 className="text-5xl font-bold">{user.name}</h1>
-                    <h4 className="text-md pt-3 font-thin">{user.username}</h4>
+                    <h1 className="text-lg md:text-5xl font-bold">
+                        {user.name}
+                    </h1>
+                    <h4 className="text-sm md:text-lg pt-3 font-thin">
+                        {user.username}
+                    </h4>
                 </div>
                 <img
-                    className="size-24 rounded-full"
+                    className="size-16 md:size-24 rounded-full"
                     src={
                         user.profilePic
                             ? user.profilePic
@@ -56,23 +60,29 @@ function UserHeader({ user }) {
                 />
             </div>
             <div className="py-4">
-                <p>{user.bio}</p>
+                <p className="text-sm md:text-lg">{user.bio}</p>
             </div>
             {user._id === currentUser.user._id && (
                 <div>
-                    <Link to={'/update'} className="btn">
+                    <Link
+                        to={'/update'}
+                        className="btn size-16 w-full md:btn-md md:w-auto"
+                    >
                         Edit Profile
                     </Link>
                 </div>
             )}
             {user._id !== currentUser.user._id && (
-                <button onClick={handleFollowUnfollow} className="btn">
+                <button
+                    onClick={handleFollowUnfollow}
+                    className="btn size-16 w-full md:btn-md md:w-auto"
+                >
                     {isFollowing ? 'Unfollow' : 'Follow'}
                 </button>
             )}
-            <div className="py-4 flex items-center justify-between flex-wrap    ">
-                <div className="text-gray-400 flex gap-3">
-                    <h3>
+            <div className="py-4  flex items-center justify-between flex-wrap">
+                <div className=" text-gray-400 flex gap-3">
+                    <h3 className="black w-[50%] md:w-auto">
                         {user.followers.length === 0
                             ? 'No Followers'
                             : user.followers.length > 1
@@ -80,7 +90,7 @@ function UserHeader({ user }) {
                             : `${followersCount} Follower`}
                     </h3>
                     <h3>&#8226;</h3>
-                    <a>
+                    <a className="w-[50%] md:w-auto">
                         Occupation :{' '}
                         <span className="badge badge-sm badge-primary">
                             Comming Soon
@@ -126,7 +136,7 @@ function UserHeader({ user }) {
                         Threads
                     </h1>
                 </div>
-                <div className="w-full">
+                <div className="w-full hidden md:inline">
                     <h1 className="border-b-2 text-gray-500 text-center border-gray-500 pb-2 cursor-pointer">
                         Replies{' '}
                         <span className="badge badge-sm badge-primary">

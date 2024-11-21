@@ -40,12 +40,12 @@ function UserProfilePage() {
     }
 
     return (
-        <>
+        <div className="overflow-x-hidden">
             <UserHeader user={user} />
             {posts.map((post) => (
                 <UserPost key={post._id} post={post} user={user} />
             ))}
-        </>
+        </div>
     );
 }
 

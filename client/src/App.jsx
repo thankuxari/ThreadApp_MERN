@@ -10,6 +10,7 @@ import axios from 'axios';
 import userAtom from './atoms/userAtom';
 import { useRecoilValue } from 'recoil';
 import { Navigate, useLocation } from 'react-router-dom';
+import './App.css';
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'https://threadapp-mern.onrender.com/';
@@ -21,7 +22,7 @@ function App() {
     const { pathname } = useLocation();
     return (
         <div
-            className={`mx-auto w-[72.5%] h-screen ${
+            className={`mx-auto w-[72.5%]  h-screen ${
                 pathname === '/' ? 'md:w-[790px]' : 'md:w-[650px]'
             }`}
         >

@@ -8,13 +8,16 @@ function Header() {
     const user = useRecoilValue(userAtom);
     return (
         <header>
-            <div className="navbar bg-base-100  py-7">
+            <div className="navbar bg-base-100 py-7">
                 <div className="flex-auto">
                     <Link
                         to={'/patchnotes'}
-                        className="btn btn-ghost text-xl font-semibold"
+                        className="btn text-sm btn-ghost md:text-xl font-semibold"
                     >
-                        Velona <span className="badge badge-primary">Beta</span>
+                        Velona{' '}
+                        <span className="badge badge-primary hidden md:inline">
+                            Beta
+                        </span>
                     </Link>
                 </div>
                 <div className="flex-auto">
@@ -33,11 +36,10 @@ function Header() {
                             role="button"
                             className="btn btn-ghost btn-circle avatar"
                         >
-                            <div className="rounded-full">
+                            <div className="size-8 md:size-12 rounded-full">
                                 {user && (
                                     <Link to={`/${user.user?.username}`}>
                                         <img
-                                            className="size-24 rounded-full"
                                             src={
                                                 user.user.profilePic
                                                     ? user.user?.profilePic

@@ -8,7 +8,7 @@ function UserPost({ post, user }) {
         <Link to={`/${user.username}/${post._id}`} className="flex pb-10">
             <div className="w-24">
                 <img
-                    className="rounded-full size-12 md:size-16 object-cover"
+                    className="rounded-full size-10 md:size-16 object-cover"
                     src={
                         user.profilePic
                             ? user.profilePic
@@ -19,9 +19,11 @@ function UserPost({ post, user }) {
             </div>
             <div className="w-full">
                 <div className="flex justify-between items-center">
-                    <h1 className="text-xl font-semibold">{user.username}</h1>
+                    <h1 className="text-md md:text-2xl font-semibold">
+                        {user.username}
+                    </h1>
                     <div className="flex gap-6 items-center">
-                        <h1 className="text-gray-400">
+                        <h1 className="text-gray-400 text-[11px]">
                             {formatDistanceToNow(new Date(post.createdAt))}
                         </h1>
                         <div className="dropdown dropdown-bottom">
@@ -46,7 +48,7 @@ function UserPost({ post, user }) {
                     </div>
                 </div>
                 <div className="pt-3">
-                    <p>{post.postText}</p>
+                    <p className="text-sm md:text-xl">{post.postText}</p>
                 </div>
                 {post.postImage && (
                     <img

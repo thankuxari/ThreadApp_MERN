@@ -73,7 +73,7 @@ function PostPage() {
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="flex md:flex-col overflow-x-hidden ">
             <div className="flex pb-10">
                 <Link to={`/${user.username}`} className="w-24">
                     <img
@@ -82,17 +82,17 @@ function PostPage() {
                                 ? user.profilePic
                                 : '/images/no_user_profile_pic.jpg'
                         }
-                        className="rounded-full size-12 md:size-16 object-cover"
+                        className="rounded-full size-10 md:size-16 object-cover"
                         alt={`${user.username}'s profile`}
                     />
                 </Link>
                 <div className="w-full">
                     <div className="flex justify-between items-center">
-                        <h1 className="text-xl font-semibold">
+                        <h1 className="text-md md:text-2xl font-semibold">
                             {user.username}
                         </h1>
                         <div className="flex gap-6 items-center">
-                            <h1 className="text-gray-400">
+                            <h1 className="text-gray-400 text-[11px]">
                                 {formatDistanceToNow(new Date(post.createdAt))}
                             </h1>
                             <div className="dropdown dropdown-bottom">
@@ -117,7 +117,7 @@ function PostPage() {
                         </div>
                     </div>
                     <div className="pt-3">
-                        <p>{post.postText}</p>
+                        <p className="text-sm md:text-xl">{post.postText}</p>
                     </div>
                     {post.postImage && (
                         <img

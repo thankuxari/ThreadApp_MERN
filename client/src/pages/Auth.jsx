@@ -8,7 +8,11 @@ import { Navigate } from 'react-router-dom';
 function Auth() {
     const authScreenState = useRecoilValue(authScreenAtom); // Read the atom state
 
-    return <>{authScreenState === 'login' ? <LoginCard /> : <SignUpCard />}</>;
+    return (
+        <div>
+            {authScreenState === 'login' ? <LoginCard /> : <SignUpCard />}
+        </div>
+    );
 }
 
 export default Auth;
