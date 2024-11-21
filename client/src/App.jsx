@@ -13,8 +13,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'https://threadapp-mern.onrender.com/';
-// axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.baseURL = 'https://threadapp-mern.onrender.com/';
+axios.defaults.baseURL = 'http://localhost:5000';
 
 function App() {
     const user = useRecoilValue(userAtom);
