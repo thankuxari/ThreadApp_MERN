@@ -59,7 +59,6 @@ async function createPost(req, res) {
             postText,
             postImage: postImg || '',
         });
-
         return res
             .status(200)
             .json({ message: 'Post created successfully', newPost });
