@@ -35,7 +35,7 @@ function Post({ post }) {
                         <img
                             src={
                                 user.profilePic
-                                    ? `http://localhost:5000/${user.profilePic}`
+                                    ? user.profilePic
                                     : '/images/no_user_profile_pic.jpg'
                             }
                             className="rounded-full size-12 md:size-16 object-cover"
@@ -79,7 +79,7 @@ function Post({ post }) {
                         </div>
                         {post.postImage && (
                             <img
-                                src={`http://localhost:5000/${post.postImage}`}
+                                src={post.postImage}
                                 className="rounded-xl pt-6 w-full"
                                 alt="post image"
                             />

@@ -13,6 +13,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'https://threadapp-mern.onrender.com/';
+// axios.defaults.baseURL = 'http://localhost:5000';
 
 function App() {
     const user = useRecoilValue(userAtom);
@@ -39,7 +40,6 @@ function App() {
                     element={user ? <UpdateProfile /> : <Navigate to="/auth" />}
                 />
                 <Route path="/auth" element={<Auth />} />
-                <Route path="/" element={<Home />} />
                 <Route
                     path="/:username"
                     element={

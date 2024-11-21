@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import userAtom from '../atoms/userAtom';
+import usePreviewImage from '../hooks/usePreviewImage';
 
 function UpdateProfile() {
     const [userProfilePic, setUserProfilePic] = useState('');
@@ -12,6 +13,8 @@ function UpdateProfile() {
     const [bio, setBio] = useState('');
     const navigate = useNavigate();
 
+    const { handleImageChange, imgUrl } = usePreviewImage();
+
     const loggedInUser = useRecoilValue(userAtom);
 
     const { enqueueSnackbar } = useSnackbar();
@@ -19,15 +22,15 @@ function UpdateProfile() {
     async function handleEditUser(e) {
         e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('username', username);
-        formData.append('bio', bio);
-        formData.append('profilePic', userProfilePic);
         try {
             const response = await axios.post(
                 `api/users/update_user/${loggedInUser.user._id}`,
-                formData
+                {
+                    name,
+                    username,
+                    bio,
+                    profilePic: imgUrl,
+                }
             );
 
             const user = response.data.user;
@@ -54,14 +57,16 @@ function UpdateProfile() {
                 </h1>
                 <div className="flex items-center justify-between">
                     <img
-                        src="/images/no_user_profile_pic.jpg"
+                        src={
+                            imgUrl ? imgUrl : '/images/no_user_profile_pic.jpg'
+                        }
                         className="size-24 rounded-full"
                         alt=""
                     />
                     <input
                         type="file"
                         className="block w-full px-2 py-1 text-sm text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        onChange={(e) => setUserProfilePic(e.target.files[0])}
+                        onChange={handleImageChange}
                     />
                 </div>
                 <label className="input input-bordered flex items-center gap-2">

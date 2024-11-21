@@ -6,7 +6,6 @@ import { CiUser } from 'react-icons/ci';
 
 function Header() {
     const user = useRecoilValue(userAtom);
-
     return (
         <header>
             <div className="navbar bg-base-100  py-7">
@@ -41,7 +40,7 @@ function Header() {
                                             className="size-24 rounded-full"
                                             src={
                                                 user.user.profilePic
-                                                    ? `http://localhost:5000/${user.user?.profilePic}`
+                                                    ? user.user?.profilePic
                                                     : '/images/no_user_profile_pic.jpg'
                                             }
                                             alt="User Profile Image"

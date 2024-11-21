@@ -79,7 +79,7 @@ function PostPage() {
                     <img
                         src={
                             user.profilePic
-                                ? `http://localhost:5000/${user.profilePic}`
+                                ? user.profilePic
                                 : '/images/no_user_profile_pic.jpg'
                         }
                         className="rounded-full size-12 md:size-16 object-cover"
@@ -121,7 +121,7 @@ function PostPage() {
                     </div>
                     {post.postImage && (
                         <img
-                            src={`http://localhost:5000/${post.postImage}`}
+                            src={post.postImage}
                             className="rounded-xl pt-6 w-full"
                             alt="Post content"
                         />
@@ -160,7 +160,7 @@ function PostPage() {
                     commentCreatedAt={reply.createdAt}
                     profileImage={
                         reply.userProfilePic
-                            ? `http://localhost:5000/${reply.userProfilePic}`
+                            ? reply.userProfilePic
                             : '/images/no_user_profile_pic.jpg'
                     }
                 />

@@ -49,7 +49,7 @@ function UserHeader({ user }) {
                     className="size-24 rounded-full"
                     src={
                         user.profilePic
-                            ? `http://localhost:5000/${user.profilePic}`
+                            ? user.profilePic
                             : '/images/no_user_profile_pic.jpg'
                     }
                     alt="User Profile Image"

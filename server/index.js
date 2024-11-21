@@ -8,6 +8,7 @@ import connectDB from './db/connectDB.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { v2 as cloudinary } from 'cloudinary';
 const __dirname = path.resolve();
 
 dotenv.config();
@@ -18,11 +19,18 @@ app.use(
     cors({
         origin: [
             'http://localhost:5000',
+            'http://localhost:5173',
             'https://threadapp-mern.onrender.com/',
         ],
         credentials: true,
     })
 );
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

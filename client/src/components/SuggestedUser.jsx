@@ -31,9 +31,9 @@ function SuggestedUser({ suggestedUser }) {
             <img
                 src={
                     suggestedUser.profilePic
-                        ? `http://localhost:5000/${suggestedUser.profilePic}`
+                        ? suggestedUser.profilePic
                         : '/images/no_user_profile_pic.jpg'
-                }
+                }   
                 className="size-10 rounded-full"
                 alt=""
             />
