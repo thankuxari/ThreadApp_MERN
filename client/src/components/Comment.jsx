@@ -10,22 +10,24 @@ function Comment({
 	likes,
 	replies,
 	commentCreatedAt,
-    post
+	post,
 }) {
 	const [isLiked, setIsLiked] = useState(false);
-    
+
 	return (
 		<div className="flex pb-10">
 			<Link to={`/${postCreator}`} className="w-24">
 				<img
-					className="size-14 rounded-full"
+					className="rounded-full size-10 md:size-16 object-cover"
 					src={profileImage}
 					alt="User Profile Image"
 				/>
 			</Link>
 			<div className="w-full">
 				<div className="flex justify-between items-center ">
-					<h1 className="text-xl font-semibold">{postCreator}</h1>
+					<h1 className="text-md md:text-2xl font-semibold">
+						{postCreator}
+					</h1>
 					<div className="flex gap-6 items-center">
 						<h1 className="text-gray-400"></h1>
 						<div className="dropdown dropdown-bottom">
@@ -52,7 +54,7 @@ function Comment({
 				<div className="pt-3">
 					<p>{postTitle}</p>
 				</div>
-				<Actions post={post}/>
+				{/* <Actions post={post} /> */}
 			</div>
 		</div>
 	);

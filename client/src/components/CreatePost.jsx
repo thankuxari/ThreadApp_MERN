@@ -32,7 +32,7 @@ function CreatePost() {
     }
 
     return (
-        <div className="max-w-lg mx-auto p-6  border border-gray-500 rounded-xl shadow-xl">
+        <div className="max-w-full mx-auto p-6  border border-gray-500 rounded-xl shadow-xl">
             <form className="flex flex-col gap-6" onSubmit={handleCreatePost}>
                 <h1 className="text-3xl font-semibold text-white text-center">
                     Tell the world a story 🌍
