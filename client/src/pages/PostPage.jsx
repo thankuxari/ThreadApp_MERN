@@ -54,7 +54,8 @@ function PostPage() {
 			);
 
 			enqueueSnackbar(replyResponse.data.message, { variant: 'success' });
-			setReplyText(''); // Clear input field
+			setReplyText('');
+			window.location.reload();
 		} catch (error) {
 			enqueueSnackbar(error.response?.data?.message, {
 				variant: 'error',
