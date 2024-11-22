@@ -80,7 +80,7 @@ function PostPage() {
 	}
 
 	return (
-		<div className="p-4 max-w-2xl mx-auto">
+		<div className="p-4 max-w-2xl mx-auto overflow-x-hidden">
 			<div className="flex items-start gap-4">
 				<Link to={`/${user.username}`}>
 					<img
@@ -101,8 +101,8 @@ function PostPage() {
 						>
 							{user.username}
 						</h1>
-						<p className="text-sm text-gray-500">
-							{formatDistanceToNow(new Date(post.createdAt))}
+						<p className="text-[10px] md:text-sm text-gray-500">
+							{formatDistanceToNow(new Date(post.createdAt))} ago
 						</p>
 					</div>
 					<p className="mt-2">{post.postText}</p>
@@ -120,10 +120,10 @@ function PostPage() {
 				<Actions post={post} />
 			</div>
 
-			<div className="mt-6">
+			<div className="mt-6 w-full">
 				<form
 					onSubmit={handlePostReply}
-					className="flex items-center gap-2"
+					className="flex flex-wrap items-center gap-2"
 				>
 					<input
 						value={replyText}
