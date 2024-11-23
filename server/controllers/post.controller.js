@@ -93,6 +93,23 @@ async function deletePost(req, res) {
     }
 }
 
+async function deleteComment(req, res) {
+    const postId = req.params.id;
+    const { commentId } = req.body;
+    try {
+        const post = await postModel.findOneAndUpdate(
+            { _id: postId },
+            { $pull: { replies: { _id: commentId } } },
+            { new: true }
+        );
+        return res
+            .status(200)
+            .json({ message: 'Comment deleted successfully' });
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
+    }
+}
+
 async function likeUnLikePost(req, res) {
     const postId = req.params.id;
     const userId = req.userId;
@@ -125,6 +142,34 @@ async function likeUnLikePost(req, res) {
         return res.status(400).json({ message: error.message });
     }
 }
+
+// async function likeUnLikeComment(req, res) {
+//     const postId = req.body;
+//     const userId = req.userId;
+//     try {
+//         const post = await postModel.findById(postId);
+//         if (!post) return res.status(400).json({ message: 'Post not found' });
+
+//         const user = await userModel.findById(userId);
+//         if (!user) return res.status(400).json({ message: 'User not found' });
+
+//         const commentIsLiked = post.replies.repliesLikes.includes(userId);
+
+//         if (commentIsLiked) {
+//             await postModel.findByIdAndUpdate(postId, {
+//                 $pull: { replies: { repliesLikes: userId } },
+//             });
+//         } else {
+//             await postModel.findByIdAndUpdate(postId, {
+//                 $push: { replies: { repliesLikes: userId } },
+//             });
+//         }
+
+//         return res.status(200).json({ message: 'Comment liked successfully' });
+//     } catch (error) {
+//         return res.status(400).json({ message: error.message });
+//     }
+// }
 
 async function replyToPost(req, res) {
     const postId = req.params.id;
@@ -189,4 +234,6 @@ export {
     replyToPost,
     getFeed,
     getUserPosts,
+    deleteComment,
+    // likeUnLikeComment,
 };

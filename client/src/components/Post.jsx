@@ -78,7 +78,15 @@ function Post({ post }) {
                                 className="dropdown-content menu bg-slate-800 rounded-box z-[1] w-52 p-2 shadow"
                             >
                                 <li>
-                                    <a>Copy Post Link</a>
+                                    <a
+                                        onClick={() =>
+                                            navigator.clipboard.writeText(
+                                                `/${user.username}/${post._id}`
+                                            )
+                                        }
+                                    >
+                                        Copy Post Link
+                                    </a>
                                 </li>
                                 <li>
                                     <a>Report Post</a>
