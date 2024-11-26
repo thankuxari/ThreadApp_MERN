@@ -11,7 +11,9 @@ function Patchnotes() {
 				<pre>
 					<code>
 						17/11/2024 <br />
-						First release of Velona <span className="badge badge-secondary">Beta</span> : 0.0.1 <br />
+						First release of Velona{' '}
+						<span className="badge badge-secondary">Beta</span> :
+						0.0.1 <br />
 						Thread App Clone <br />
 						Missing Features to Come : Delete Post, Repost
 						User/Post/Comment,Chat,Replies on Profile Page,
@@ -20,8 +22,13 @@ function Patchnotes() {
 						<br />
 						Instagram Link, Occupation on Profile, Spotify Playlist,{' '}
 						<br />
-						Custom Emoji Icons on Profile Page, <br/>
-                        Responsive Design
+						Custom Emoji Icons on Profile Page, <br />
+						Responsive Design
+						<br />
+						24/11/2024
+						<br />
+						Added Delete Comment/Post Feature, General UI
+						Impovements and Bug Fixes
 					</code>
 				</pre>
 			</div>
